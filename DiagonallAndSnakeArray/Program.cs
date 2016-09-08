@@ -4,9 +4,17 @@ namespace DiagonallAndSnakeArray
 {
     class Program
     {
+        private static int i,j;
+
         private static void Main(string[] args)
         {
-            int[,] twoArray = new int[3, 3];
+            int n = int.Parse(Console.ReadLine());
+            int[][] twoArray = new int[n][];
+            for (int i = 0; i < twoArray.Length; i++)
+            {
+                twoArray[i] = new int[n];
+            }
+            
             SetArray(twoArray);
             Print(twoArray);
             //DiagonalSetArray(twoArray);
@@ -16,84 +24,78 @@ namespace DiagonallAndSnakeArray
         }
 
         //смена элементов относительно побочной диагонали
-        //private static void DiagonalSetArray(int[,] a)
+        //private static void DiagonalSetArray(int[][] a)
         //{
-        //    for (int i = 0; i < 3 - 1; i++)
+        //    for (i = 0; i < a.Length; i++)
         //    {
-        //        for (int j = 0; j < 3 - i; j++)
+        //        for (j = 0; j < a[i].Length; j++)
         //        {
-        //            int b = a[i, j];
-        //            a[i, j] = a[3 - (j + 1), 3 - (i + 1)];
-        //            a[3 - (j + 1), 3 - (i + 1)] = b;
+        //            if (i + j < a.Length - 1) //для элементов над побочной диагональю должно выполняться условие (i + j < n-1)
+        //            {
+        //                int b = a[i][j];
+        //                int k = a.Length - (j + 1);
+        //                int l = a.Length - (i + 1);
+        //                int c = a[k][l];
+        //                a[i][j] = c;
+        //                a[k][l] = b;
+        //            }
         //        }
         //    }
         //}
 
-        //смена элементов относительно главной диагонали (вариант 1)
-        //private static void DiagonalSetArray(int[,] a)
+        // смена элементов относительно главной диагонали
+        //private static void DiagonalSetArray(int[][] a)
         //{
-        //    for (int i = 0; i < 3; i++)
+        //    for (i = 0; i < a.Length; i++)
         //    {
-        //        for (int j = 0; j < 3; j++)
-        //            a[i, j] = (j * 3) + i + 1;
-
-        //    }
-        //}
-
-        // смена элементов относительно главной диагонали (вариант 2)
-        //private static void DiagonalSetArray(int[,] a)
-        //{
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        for (int j = i + 1; j < 3; j++)
+        //        for (j = i + 1; j < a[i].Length; j++)
         //        {
-        //                int b = a[j, i];
-        //                a[j, i] = a[i, j];
-        //                a[i, j] = b;
+        //            int k = i;
+        //            int l = j;
+        //            int b = a[l][k];
+        //            a[l][k] = a[k][l];
+        //            a[k][l] = b;
         //        }
         //    }
         //}
-
-        private static void SetArray(int[,] a)
-        {
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                    a[i, j] = (i * 3) + j + 1;
-
-            }
-        }
 
         //горизонтальная змейка
-        //private static void SetArray(int[,] a)
+        //private static void SetArray(int[][] a)
         //{
-        //    for (int i = 0; i < 3; i++)
+        //    for (i = 0; i < a.Length; i++)
         //    {
-        //        for (int j = 0; j < 3; j++)
-        //            if (i % 2 == 0) { a[i, j] = (i * 3) + j + 1; }
-        //            else { a[i, j] = (i * 3) - j + 3; }
+        //        for (j = 0; j < a[i].Length; j++)
+        //            if (i % 2 == 0) {a[i][j] = (i * a.Length) + j + 1;}
+        //            else {a[i][j] = (i * a.Length) - j + a.Length;}
         //    }
         //}
 
         //вертикальная змейка
-        //private static void SetArray(int[,] a)
+        //private static void SetArray(int[][] a)
         //{
-        //    for (int i = 0; i < 3; i++)
+        //    for (i = 0; i < a.Length; i++)
         //    {
-        //        for (int j = 0; j < 3; j++)
-        //            if (j % 2 == 0) { a[i, j] = (j * 3) + i + 1; }
-        //            else { a[i, j] = (j * 3) - i + 3; }
+        //        for (j = 0; j < a[i].Length; j++)
+        //            if (j % 2 == 0) { a[i][j] = (j * a.Length) + i + 1; }
+        //            else { a[i][j] = (j * a.Length) - i + a.Length; }
         //    }
         //}
 
-        private static void Print(int[,] a)
+        private static void SetArray(int[][] a)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
+            var r = new Random();
+            for (int i = 0; i < a.Length; i++)
+                for (int j = 0; j < a[i].Length; j++)
+                    a[i][j] = r.Next(10);
+        }
 
-                    Console.Write(a[i, j] + " ");
+        private static void Print(int[][] a)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                for (int j = 0; j < a[i].Length; j++)
+
+                    Console.Write(a[i][j] + " ");
                 Console.WriteLine();
             }
             Console.WriteLine();
