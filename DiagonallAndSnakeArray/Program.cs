@@ -1,5 +1,7 @@
 ﻿using System;
-
+/// <summary>
+/// Заполнение двумерного массива относительно диагоналей и змейкой.
+/// </summary>
 namespace DiagonallAndSnakeArray
 {
     class Program
